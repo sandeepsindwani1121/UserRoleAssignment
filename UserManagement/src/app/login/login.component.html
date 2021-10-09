@@ -1,0 +1,30 @@
+<div class="example-container">
+  <div class="form-container">
+    <form [formGroup]="loginForm" novalidate>
+
+  <mat-card>
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label> UserName </mat-label>
+        <input autocomplete="off" matInput formControlName="username" required #username name="username" placeholder="UserName" />
+        <mat-error *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)">
+          <span *ngIf="loginForm.controls['username'].errors.required">Please Enter Username</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> Password </mat-label>
+        <input type="password" autocomplete="off" matInput formControlName="password" required #password name="password" placeholder="Password" />
+        <mat-error *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+          <span *ngIf="loginForm.controls['password'].errors.required">Please Enter Password</span>
+        </mat-error>
+      </mat-form-field>
+
+  
+        <button type="submit" class="btn btn-primary"
+         (click)="login(username.value, password.value)"
+        [disabled]="loginForm.pristine || loginForm.invalid" >
+         Login
+        </button>
+</mat-card>
+</form>
+</div></div>

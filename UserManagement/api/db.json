@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "sandeep",
+      "password": "sandeep",
+      "email": "sandeep@gmail.com",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "vikas",
+      "password": "vikas",
+      "email": "vikas@gmail.com",
+      "role": "user"
+    },
+    {
+      "username": "sanjay",
+      "password": "sanjay",
+      "email": "sanjay@gmail.com",
+      "role": "user",
+      "id": 3
+    }
+  ]
+}

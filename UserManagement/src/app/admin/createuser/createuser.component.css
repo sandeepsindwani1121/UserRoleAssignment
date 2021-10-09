@@ -1,0 +1,14 @@
+.example-container{
+    text-align: center
+ }
+ 
+ .form-container{
+    width: 100%;
+    margin: 0 px auto; 
+    margin-top: 200 px;
+    vertical-align: left;
+ }
+ 
+ .form-field{
+    display: block
+ }

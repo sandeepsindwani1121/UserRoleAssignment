@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+    <div class="nav navbar-nav">
+        <a class="nav-item nav-link active" routerLink=''>Home</a>
+        <a class="nav-item nav-link" routerLink='login' *ngIf="!isLoggedIn" >Login</a>
+    </div>
+
+    <ul class="navbar-nav  ml-auto">
+        <li class="nav-item"> 
+          <a routerLink="/admin" class="nav-link" *ngIf="isLoggedIn && getAdminRole"> Admin Dashboard</a>
+        </li>
+        <li class="nav-item"> 
+          <a routerLink="/user" class="nav-link" *ngIf="isLoggedIn && !getAdminRole"> User Dashboard</a>
+        </li>
+         <li class="nav-item">
+            <a routerLink="/login" class="nav-link" *ngIf="isLoggedIn">Logout</a>
+          </li>
+      </ul>
+
+  </nav>
+   

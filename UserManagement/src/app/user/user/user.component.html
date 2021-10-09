@@ -1,0 +1,14 @@
+My Profile
+
+<table class="table">
+        <tr>
+            <td>Name</td><td>{{user.username}}</td>
+        </tr>
+        <tr>
+            <td>Email</td><td>{{user.email}}</td>
+        </tr>
+        <tr>
+            <td>Role</td><td>{{user.role}}</td>
+        </tr>
+</table> 
+<a [routerLink]="['/user/edituser', user.id]" class="btn btn-success">Edit</a>
