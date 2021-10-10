@@ -9,7 +9,7 @@
     "e2e": "ng e2e",
     "api": "json-server api/db.json --routes api/routes.json --no-cors=true",
     "test": "jest",
-    "compodoc": "npx compodoc -p tsconfig.app.json -n \"documentation\""
+    "compodoc": "npx compodoc -p src/tsconfig.app.json -n \"documentation\""
   },
   "private": true,
   "dependencies": {

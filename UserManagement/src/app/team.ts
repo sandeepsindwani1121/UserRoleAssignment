@@ -1,7 +1,6 @@
 export class Team {
-    id: number;
-    name:String;
-    coach:string;
-    description:string;
+  id: number;
+  name: string;
+  coach: string;
+  description: string;
 }
-

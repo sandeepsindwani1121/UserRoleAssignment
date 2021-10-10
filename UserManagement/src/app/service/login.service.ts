@@ -1,80 +1,83 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Title} from '@angular/platform-browser';
-import {Observable, throwError} from 'rxjs';
-import {map, catchError} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Login } from '../login';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-  redirectUrl :string;
-  constructor(private _http:HttpClient) { }
+  redirectUrl: string;
+  constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Login[]>{
-    return this._http.get<Login[]>('/api/users/')
+  getAll(): Observable<Login[]> {
+    return this.http.get<Login[]>('/api/users/');
   }
 
-  getById(id) : Observable<Login>{
-    return this._http.get<Login>('/api/users/'+id);
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  getById(id): Observable<Login> {
+    return this.http.get<Login>('/api/users/' + id);
   }
 
-  Add(data){
-    return this._http.post<Login>('/api/users/', data);
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  Add(data): any {
+    return this.http.post<Login>('/api/users/', data);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  update(data): any {
+    return this.http.put<Login>('/api/users/' + data.id, data);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  delete(id): any {
+    return this.http.delete<Login>('/api/users/' + id);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  Login(username, password): any {
+    return this.http.get('/api/users/').pipe(
+      map((response) => {
+        response = Object.values(response).filter((x) => {
+          return x.username === username && x.password === password;
+        });
+        if (response !== null && response !== undefined) {
+          console.log(response);
+          localStorage.setItem('currentUser', JSON.stringify(response));
+        }
+      })
+    );
   }
 
- update(data){
-  return this._http.put<Login>('/api/users/'+data.id, data);
- }
-
- delete(id){
-  return this._http.delete<Login>('/api/users/'+id);
- }
-
-  Login(username,password){
-   return this._http.get('/api/users/').pipe(
-     map(response=>
-       {
-            response= Object.values(response).filter(function(x){return x.username==username && x.password==password});
-             if(response!=null && response!=undefined){
-               console.log(response);
-             localStorage.setItem('currentUser', JSON.stringify(response));
-             }
-       })
-   )}
-
-  isLoggedIn(){
-    if( localStorage.getItem('currentUser')){
-    return true;
+  isLoggedIn(): boolean {
+    if (localStorage.getItem('currentUser')) {
+      return true;
+    } else {
+      return false;
     }
-    else{
-    return false;
-    }
   }
 
-  getUserName(){
-    const userData=localStorage.getItem("currentUser");
-     if(userData!=null && userData!=undefined){
-       return JSON.parse(userData)[0].username;
-     }
+  getUserName(): string {
+    const userData = localStorage.getItem('currentUser');
+    if (userData !== null && userData !== undefined) {
+      return JSON.parse(userData)[0].username;
+    }
     return '';
   }
 
-  getAdminRole(){
-    const userData=localStorage.getItem("currentUser");
-     if(userData!=null && userData!=undefined){
-       let role= JSON.parse(userData)[0].role;
-       if(role=='admin')
-       return true;
-       else
-       return false;
-     }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  getAdminRole(): boolean {
+    const userData = localStorage.getItem('currentUser');
+    if (userData !== null && userData !== undefined) {
+      const role = JSON.parse(userData)[0].role;
+      if (role === 'admin') {
+        return true;
+      } else {
+        return false;
+      }
+    }
     return false;
   }
 
-  LoggedOut(){
-    localStorage.removeItem("currentUser");
+  LoggedOut(): void {
+    localStorage.removeItem('currentUser');
   }
-
 }
